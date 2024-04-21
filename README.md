@@ -8,7 +8,5 @@ e-mail: p.v.geest@student.tue.nl
 
 ID: 1462326
 
-modules required: 
-
-argparse, torch, torchvision, matplotlib, numpy, wandb, os
+modules required: argparse, torch, torchvision, matplotlib, numpy, wandb, os
 
