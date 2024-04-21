@@ -118,7 +118,7 @@ class decoder(nn.Module):
         return x
     
 model = Model()
-model.load_state_dict(torch.load('scarlet-sea-4.pth', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('model_file', map_location=torch.device('cpu')))
 
 def preprocess_masks(masks):
     transform = transforms.Compose([
