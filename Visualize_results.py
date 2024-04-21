@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -124,7 +118,7 @@ class decoder(nn.Module):
         return x
     
 model = Model()
-model.load_state_dict(torch.load('path to model file', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('scarlet-sea-4.pth', map_location=torch.device('cpu')))
 
 def preprocess_masks(masks):
     transform = transforms.Compose([
@@ -136,8 +130,8 @@ def preprocess_masks(masks):
 
     return masks
 
-val = datasets.Cityscapes("/gpfs/work5/0/jhstue005/JHS_data/CityScapes", split='train', mode='fine', target_type='semantic', target_transform=preprocess_masks)
-validationloader = DataLoader(val, batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
+val = datasets.Cityscapes("/gpfs/work5/0/jhstue005/JHS_data/CityScapes", split='train', mode='fine', target_type='semantic',transform = preprocess, target_transform=preprocess_masks)
+validationloader = DataLoader(val, batch_size=1, shuffle=True, num_workers=1, pin_memory=True)
 
 Label = namedtuple( 'Label' , [
 
@@ -327,10 +321,4 @@ with torch.no_grad():
         if i >= 3:
             break
         masks = masks.numpy()
-        images_large = preprocess(images).unsqueeze(0)
-        images_small = preprocess_small(images).unsqueeze(0)
-        visualize(images_large,masks,model)
-
-
-
-
+        visualize(images,masks,model)
